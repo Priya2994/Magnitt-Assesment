@@ -1,0 +1,62 @@
+[
+  {
+    "year": 2020,
+    "num_of_deals": 147,
+    "total_amount_raised": 630785688,
+    "num_of_regular_deals": 146,
+    "total_amount_raised_regular_deals": 480785688,
+    "num_of_mega_deals": 1,
+    "total_amount_raised_mega_deals": 150000000,
+    "label": 2020
+  },
+  {
+    "year": 2021,
+    "num_of_deals": 183,
+    "total_amount_raised": 1559670729,
+    "num_of_regular_deals": 181,
+    "total_amount_raised_regular_deals": 844670729,
+    "num_of_mega_deals": 2,
+    "total_amount_raised_mega_deals": 715000000,
+    "label": 2021
+  },
+  {
+    "year": 2022,
+    "num_of_deals": 187,
+    "total_amount_raised": 1320104191,
+    "num_of_regular_deals": 185,
+    "total_amount_raised_regular_deals": 939604191,
+    "num_of_mega_deals": 2,
+    "total_amount_raised_mega_deals": 380500000,
+    "label": 2022
+  },
+  {
+    "year": 2023,
+    "num_of_deals": 172,
+    "total_amount_raised": 612174461,
+    "num_of_regular_deals": 172,
+    "total_amount_raised_regular_deals": 612174461,
+    "num_of_mega_deals": 0,
+    "total_amount_raised_mega_deals": 0,
+    "label": 2023
+  },
+  {
+    "year": 2024,
+    "num_of_deals": 211,
+    "total_amount_raised": 720892584,
+    "num_of_regular_deals": 210,
+    "total_amount_raised_regular_deals": 620892584,
+    "num_of_mega_deals": 1,
+    "total_amount_raised_mega_deals": 100000000,
+    "label": 2024
+  },
+  {
+    "year": 2025,
+    "num_of_deals": 174,
+    "total_amount_raised": 1464881148,
+    "num_of_regular_deals": 171,
+    "total_amount_raised_regular_deals": 811881148,
+    "num_of_mega_deals": 3,
+    "total_amount_raised_mega_deals": 653000000,
+    "label": 2025
+  }
+]
