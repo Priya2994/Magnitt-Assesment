@@ -44,10 +44,22 @@ export default function GroupedChart({
     svg.attr("width", width).attr("height", height);
     svg.selectAll("*").remove();
 
-    if (!data || data.length === 0 || !countries || countries.length === 0) {
-      svg.append("text").text("No data to display").attr("x", 10).attr("y", 20);
-      return;
-    }
+   if (!data || data.length === 0 || !countries || countries.length === 0) {
+  const width = +svg.attr("width");
+  const height = +svg.attr("height");
+
+  svg.append("text")
+    .text("Please choose one or more countries to view the chart")
+    .attr("x", width / 2)
+    .attr("y", height / 2)
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .attr("font-weight", 700)
+    .attr("font-size", 18)
+
+  return;
+}
+
 
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
