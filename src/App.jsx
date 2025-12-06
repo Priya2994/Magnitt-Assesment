@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchCountryData } from "./api";
 import Filters from "./components/filter";
 import { AVAILABLE, COLORS } from "./utils/constant";
-import BarChart from "./components/barChart";
+import Chart from "./components/Chart";
 
 export default function App() {
   const [selected, setSelected] = useState(["KSA"]);
@@ -145,7 +145,7 @@ export default function App() {
         <div className="flex gap-6 mt-4">
           <div className="flex-1">
             {loading && <div className="mb-2 text-gray-500">Loading data...</div>}
-            <BarChart
+            <Chart
               rawData={rawData}
               countryName={singleCountry}
               data={singleCountry ? null : chartData}

@@ -14,7 +14,7 @@ export default function GroupedChart({
 }) {
   const ref = useRef(null);
   const tooltip = useTooltip();
-  const margin = { top: 64, right: 160, bottom: 72, left: 80 }; // increased top margin to fit legend
+  const margin = { top: 80, right: 160, bottom: 72, left: 80 }; // top margin increased to fit legend + country name
 
   function getColorsForCountry(country) {
     const fallbackRegular = "#14532d";
@@ -37,7 +37,7 @@ export default function GroupedChart({
   }
 
   // vertical offset (pixels) between top of bar and the total label
-  const TOP_TOTAL_OFFSET = 12;
+  const TOP_TOTAL_OFFSET = 15;
 
   useEffect(() => {
     const svg = d3.select(ref.current);
@@ -262,17 +262,18 @@ export default function GroupedChart({
         .text("Deals");
     }
 
-    // TOP-CENTER dynamic legend per selected country: horizontal swatches (regular then mega)
+    // TOP-CENTER dynamic legend per selected country: horizontal swatches (regular then mega) with labels and country name on top
     const topLegend = svg.append("g").attr("class", "top-legend");
     const swatchSize = 14;
-    const gap = 28; // gap between legend items
-    const labelGap = 12; // gap between swatches and country name
-    // compute width per item: two swatches + gaps + approx label width
-    const approxLabelWidth = 72;
-    const itemWidth = swatchSize * 2 + labelGap + approxLabelWidth;
+    const swLabelGap = 6; // gap between swatch and its label
+    const swLabelWidth = 48; // space reserved for each swatch label
+    const interSwatchGap = 12; // gap between the two swatch+label groups
+    const gap = 28; // gap between country legend items
+    // width per item: two (swatch + label) blocks + inter gap
+    const itemWidth = (swatchSize + swLabelGap + swLabelWidth) * 2 + interSwatchGap;
     const totalLegendWidth = countries.length * itemWidth + Math.max(0, countries.length - 1) * gap;
     const startX = margin.left + Math.max(0, (innerW - totalLegendWidth) / 2);
-    const yOff = 8; // top padding inside svg
+    const yOff = 20; // top padding inside svg
 
     countries.forEach((country, i) => {
       const { regularColor, megaColor } = getColorsForCountry(country);
@@ -280,35 +281,54 @@ export default function GroupedChart({
 
       const sw = topLegend.append("g").attr("transform", `translate(${xOff}, ${yOff})`);
 
-      // regular swatch (left)
-      sw.append("rect")
-        .attr("x", 0)
+      // country name centered above the swatches
+      sw.append("text")
+        .attr("x", itemWidth / 2)
         .attr("y", 0)
+        .attr("text-anchor", "middle")
+        .attr("font-size", 12)
+        .attr("font-weight", 700)
+        .attr("fill", "#111827")
+        .text(country);
+
+      const swY = 16; // vertical position for swatches
+      // Regular swatch + label (left)
+      const leftSwX = 0;
+      sw.append("rect")
+        .attr("x", leftSwX)
+        .attr("y", swY)
         .attr("width", swatchSize)
         .attr("height", swatchSize)
         .attr("rx", 2)
         .attr("ry", 2)
         .attr("fill", regularColor);
+      sw.append("text")
+        .attr("x", leftSwX + swatchSize + swLabelGap)
+        .attr("y", swY + swatchSize / 2 + 4)
+        .attr("text-anchor", "start")
+        .attr("font-size", 11)
+        .attr("font-weight", 600)
+        .attr("fill", "#111827")
+        .text("Regular");
 
-      // mega swatch (right of regular)
+      // Mega swatch + label (right)
+      const rightSwX = leftSwX + (swatchSize + swLabelGap + swLabelWidth) + interSwatchGap;
       sw.append("rect")
-        .attr("x", swatchSize + 6)
-        .attr("y", 0)
+        .attr("x", rightSwX)
+        .attr("y", swY)
         .attr("width", swatchSize)
         .attr("height", swatchSize)
         .attr("rx", 2)
         .attr("ry", 2)
         .attr("fill", megaColor);
-
-      // country label to the right of swatches
       sw.append("text")
-        .attr("x", swatchSize * 2 + labelGap)
-        .attr("y", swatchSize / 2 + 4) // vertical center
+        .attr("x", rightSwX + swatchSize + swLabelGap)
+        .attr("y", swY + swatchSize / 2 + 4)
         .attr("text-anchor", "start")
-        .attr("font-size", 12)
+        .attr("font-size", 11)
         .attr("font-weight", 600)
         .attr("fill", "#111827")
-        .text(country);
+        .text("Mega");
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

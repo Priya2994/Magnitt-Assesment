@@ -2,7 +2,7 @@ import React from "react";
 import SingleStackedChart from "./SingleStackedChart";
 import GroupedChart from "./GroupChart";
 
-export default function BarChart(props) {
+export default function Chart(props) {
   const { rawData } = props;
 
   return (
